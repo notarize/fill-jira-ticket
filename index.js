@@ -16,6 +16,8 @@ async function run() {
     }
 
     const jiraTicketKey = title.match(new RegExp("/(\w+-\d+)/"))[0];
+    core.warning(title)
+    core.warning(jiraTicketKey)
     core.info(`Jira Ticket Key: ${jiraTicketKey}`);
     const body = github.context.payload.pull_request.body;
     if (body.contains(`https://notarize.atlassian.net/browse/${jiraTicketKey}`)) {
