@@ -14,9 +14,9 @@ async function run() {
       core.warning("PR is adhoc or storybook -- no updates made"); 
       return;
     }
-    
+
     core.warning(title)
-    const jiraTicketKey = title.match(new RegExp("/(\w+-\d+)/"))[0];
+    // const jiraTicketKey = title.match(new RegExp("/(\w+-\d+)/"))[0];
     core.info(`Jira Ticket Key: ${jiraTicketKey}`);
     const body = github.context.payload.pull_request.body;
     if (body.contains(`https://notarize.atlassian.net/browse/${jiraTicketKey}`)) {
