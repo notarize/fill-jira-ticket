@@ -15,8 +15,6 @@ async function run() {
       return;
     }
 
-
-    console.log(title)
     const jiraTicketKey = title.match(new RegExp("/(\w+-\d+)/"))[0];
     core.info(`Jira Ticket Key: ${jiraTicketKey}`);
     const body = github.context.payload.pull_request.body;
