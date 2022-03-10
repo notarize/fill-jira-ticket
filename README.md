@@ -1,4 +1,6 @@
 
+## This action was originally created here: https://github.com/Jasmeet107/fill-jira-ticket and moved to notarize org on 3/10 
+
 <p align="center">
   <a href="https://github.com/actions/javascript-action"><img alt="GitHub Actions status" src="https://github.com/actions/javascript-action/workflows/test-local/badge.svg"></a>
 </p>
