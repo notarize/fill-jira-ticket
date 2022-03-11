@@ -17,8 +17,6 @@ async function run() {
 
     const jiraTicketKey = title.match(new RegExp("/(\w+-\d+)/"))[0];
     core.info(`Jira Ticket Key: ${jiraTicketKey}`);
-    core.info(github)
-    core.info(github.context.payload.pull_request.body)
     const body = github.context.payload.pull_request.body;
     if (body.contains(`https://notarize.atlassian.net/browse/${jiraTicketKey}`)) {
       core.warning('PR body is prefixed already - no updates made');
