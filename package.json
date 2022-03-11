@@ -23,8 +23,9 @@
   },
   "homepage": "https://github.com/actions/javascript-action#readme",
   "dependencies": {
-    "@actions/core": "^1.6.0",
-    "@actions/github": "^5.0.0"
+    "@actions/core": "^1.1.1",
+    "@actions/github": "^1.1.0",
+    "acorn": "^6.3.0"
   },
   "devDependencies": {
     "eslint": "^6.3.0",
