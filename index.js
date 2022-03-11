@@ -9,17 +9,25 @@ async function run() {
     }
 
     const title = github.context.payload.pull_request.title;
+    core.info(title);
     const isAdhoc = title.includes('ADHOC') || title.includes('STORYBOOK');
     if (isAdhoc) {
-      core.warning("PR is adhoc or storybook -- no updates made"); 
+      core.info("PR is adhoc or storybook -- no updates made"); 
       return;
     }
 
-    const jiraTicketKey = title.match(new RegExp("/(\w+-\d+)/"))[0];
+    core.info(title);
+    const matches = title.match(/(\w+-\d+)/)
+    if (!(matches)) {
+      core.warning("Jira ticket not in PR title");
+      return;
+    }
+    const jiraTicketKey = matches[0];
     core.info(`Jira Ticket Key: ${jiraTicketKey}`);
     const body = github.context.payload.pull_request.body;
-    if (body.contains(`https://notarize.atlassian.net/browse/${jiraTicketKey}`)) {
-      core.warning('PR body is prefixed already - no updates made');
+    core.info(body);
+    if (body.includes(jiraTicketKey)) {
+      core.info('PR body is prefixed already - no updates made');
       return;
     }
 
@@ -29,15 +37,15 @@ async function run() {
       pull_number: github.context.payload.pull_request.number,
     }
 
-    linkRegex = /(?m)^(?=.*?\bJIRA\b)(?=.*?\bticket\b).*$/
+    linkRegex = /^(?=.*?\bJIRA\b)(?=.*?\bticket\b).*$/m
     lineToAdd = `:ticket: [JIRA ticket](https://notarize.atlassian.net/browse/${jiraTicketKey})`
-    lineExists = body.match(new RegExp(linkRegex))
-    if (lineExists.length > 0) {
+    lineExists = body.match(linkRegex)
+    if (lineExists) {
       core.info("Line exists in PR body without ticket");
-      request.body = body.replace(new RegExp(linkRegex), lineToAdd)
+      request.body = body.replace(linkRegex, lineToAdd)
     } else {
       core.info("Adding line to PR body");
-      request.body = lineToAdd.contact('\n', body);
+      request.body = lineToAdd.concat('\n', body);
     }
 
     core.debug(`new body: ${request.body}`)
