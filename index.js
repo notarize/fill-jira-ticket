@@ -37,9 +37,9 @@ async function run() {
       pull_number: github.context.payload.pull_request.number,
     }
 
-    linkRegex = /^(?=.*?\bJIRA\b)(?=.*?\bticket\b).*$/m
-    lineToAdd = `:ticket: [JIRA ticket](https://notarize.atlassian.net/browse/${jiraTicketKey})`
-    lineExists = body.match(linkRegex)
+    const linkRegex = /^(?=.*?\bJIRA\b)(?=.*?\bticket\b).*$/m
+    let lineToAdd = `:ticket: [JIRA ticket](https://notarize.atlassian.net/browse/${jiraTicketKey})`
+    const lineExists = body.match(linkRegex)
     if (lineExists) {
       core.info("Line exists in PR body without ticket");
       request.body = body.replace(linkRegex, lineToAdd)
