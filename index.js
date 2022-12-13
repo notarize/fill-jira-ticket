@@ -38,7 +38,7 @@ async function run() {
     }
 
     const linkRegex = /^(?=.*?\bJIRA\b)(?=.*?\bticket\b).*$/m
-    let lineToAdd = `:ticket: [JIRA ticket](https://notarize.atlassian.net/browse/${jiraTicketKey})`
+    let lineToAdd = `:ticket: [JIRA ticket: ${jiraTicketKey}](https://notarize.atlassian.net/browse/${jiraTicketKey}) :ticket:`
     const lineExists = body.match(linkRegex)
     if (lineExists) {
       core.info("Line exists in PR body without ticket");
@@ -50,7 +50,7 @@ async function run() {
 
     core.debug(`new body: ${request.body}`)
 
-    const client = new github.GitHub(inputs.token);
+    const client = github.getOctokit(inputs.token);
     const response = await client.pulls.update(request);
 
     core.info(`response: ${response.status}`);
