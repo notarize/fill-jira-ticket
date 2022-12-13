@@ -24,10 +24,11 @@ async function run() {
     }
     const jiraTicketKey = matches[0];
     core.info(`Jira Ticket Key: ${jiraTicketKey}`);
-    const body = github.context.payload.pull_request.body;
-    core.info(body);
+    let body = github.context.payload.pull_request.body;
+    // core.info(body);
     if (!body) {
-      core.info('PR body not supplied.  Skipping.')
+      core.warning('Body is blank.  Jira ticket will over-write any previous body.');
+      body = ""
     }
     if (body.includes(jiraTicketKey)) {
       core.info('PR body is prefixed already - no updates made');
