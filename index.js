@@ -26,6 +26,9 @@ async function run() {
     core.info(`Jira Ticket Key: ${jiraTicketKey}`);
     const body = github.context.payload.pull_request.body;
     core.info(body);
+    if (!body) {
+      core.info('PR body not supplied.  Skipping.')
+    }
     if (body.includes(jiraTicketKey)) {
       core.info('PR body is prefixed already - no updates made');
       return;
