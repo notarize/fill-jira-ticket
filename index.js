@@ -45,10 +45,10 @@ async function run() {
     let lineToAdd = `:ticket: [JIRA ticket: ${jiraTicketKey}](https://notarize.atlassian.net/browse/${jiraTicketKey}) :ticket:`
     const lineExists = body.match(linkRegex)
     if (lineExists) {
-      core.info("Line exists in PR body without ticket");
+      core.info("'JIRA ticket' exists in PR body without ticket number; replacing that line.");
       request.body = body.replace(linkRegex, lineToAdd)
     } else {
-      core.info("Adding line to PR body");
+      core.info("'JIRA ticket' not found.  Adding line to PR body.");
       request.body = lineToAdd.concat('\n', body);
     }
 
