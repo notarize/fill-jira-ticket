@@ -1,115 +1,109 @@
 
-## This action was originally created here: https://github.com/Jasmeet107/fill-jira-ticket and moved to notarize org on 3/10 
+##Thisactionwasoriginallycreatedhere:https://github.com/Jasmeet107/fill-jira-ticketandmovedtonotarizeorgon3/10
 
-<p align="center">
-  <a href="https://github.com/actions/javascript-action"><img alt="GitHub Actions status" src="https://github.com/actions/javascript-action/workflows/test-local/badge.svg"></a>
+<palign="center">
+<ahref="https://github.com/actions/javascript-action"><imgalt="GitHubActionsstatus"src="https://github.com/actions/javascript-action/workflows/test-local/badge.svg"></a>
 </p>
 
-# Create a JavaScript Action
+#CreateaJavaScriptAction
 
-Use this template to bootstrap the creation of a JavaScript action.:rocket:
+UsethistemplatetobootstrapthecreationofaJavaScriptaction.:rocket:
 
-This template includes tests, linting, a validation workflow, publishing, and versioning guidance.  
+Thistemplateincludestests,linting,avalidationworkflow,publishing,andversioningguidance.
 
-If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
+Ifyouarenew,there'salsoasimplerintroduction.Seethe[HelloWorldJavaScriptAction](https://github.com/actions/hello-world-javascript-action)
 
-## Create an action from this template
+##Createanactionfromthistemplate
 
-Click the `Use this Template` and provide the new repo details for your action
+Clickthe`UsethisTemplate`andprovidethenewrepodetailsforyouraction
 
-## Code in Master
+##CodeinMaster
 
-Install the dependencies  
+Installthedependencies
 ```bash
-$ npm install
+$npminstall
 ```
 
-Run the tests :heavy_check_mark:  
+Runthetests:heavy_check_mark:
 ```bash
-$ npm test
+$npmtest
 
- PASS  ./index.test.js
-  ✓ throws invalid number (3ms)
-  ✓ wait 500 ms (504ms)
-  ✓ test runs (95ms)
+PASS./index.test.js
+✓throwsinvalidnumber(3ms)
+✓wait500ms(504ms)
+✓testruns(95ms)
 
 ...
 ```
 
-## Change action.yml
+##Changeaction.yml
 
-The action.yml contains defines the inputs and output for your action.
+Theaction.ymlcontainsdefinestheinputsandoutputforyouraction.
 
-Update the action.yml with your name, description, inputs and outputs for your action.
+Updatetheaction.ymlwithyourname,description,inputsandoutputsforyouraction.
 
-See the [documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions)
+Seethe[documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions)
 
-## Change the Code
+##ChangetheCode
 
-Most toolkit and CI/CD operations involve async operations so the action is run in an async function.
+MosttoolkitandCI/CDoperationsinvolveasyncoperationssotheactionisruninanasyncfunction.
 
 ```javascript
-const core = require('@actions/core');
+constcore=require('@actions/core');
 ...
 
-async function run() {
-  try { 
-      ...
-  } 
-  catch (error) {
-    core.setFailed(error.message);
-  }
+asyncfunctionrun(){
+try{
+...
+}
+catch(error){
+core.setFailed(error.message);
+}
 }
 
 run()
 ```
 
-See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/README.md#packages) for the various packages.
+Seethe[toolkitdocumentation](https://github.com/actions/toolkit/blob/master/README.md#packages)forthevariouspackages.
 
-## Publish to a distribution branch
+##Publishtoadistributionbranch
 
-Actions are run from GitHub repos.  We will create a releases branch and only checkin production modules (core in this case). 
+ActionsarerunfromGitHubrepos.Wewillcreateafeaturebranchandonlycheckinproductionmodules.
 
-Comment out node_modules in .gitignore and create a releases/v1 branch
 ```bash
-# comment this out distribution branches
-# node_modules/
+$gitcheckout-b$feature_branch
+$gitcommit-a-m"proddependencies"
 ```
 
 ```bash
-$ git checkout -b releases/v1
-$ git commit -a -m "prod dependencies"
+$bin/rebuild-for-deploy.sh
+$gitaddnode_modulespackage-lock.json
+$gitcommit-a-m"proddependencies"
+$gitpushorigin$feature_branch
 ```
 
-```bash
-$ npm prune --production
-$ git add node_modules
-$ git commit -a -m "prod dependencies"
-$ git push origin releases/v1
-```
+Now,openaPR,getitreview,mergeitandthentagtherelease.
 
-Your action is now published! :rocket: 
+Seethe[versioningdocumentation](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
 
-See the [versioning documentation](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
+##Validate
 
-## Validate
-
-You can now validate the action by referencing the releases/v1 branch
+Youcannowvalidatetheactionbyreferencingthereleases/v1branch
 
 ```yaml
-uses: actions/javascript-action@releases/v1
+uses:actions/javascript-action@releases/v1
 with:
-  milliseconds: 1000
+milliseconds:1000
 ```
 
-See the [actions tab](https://github.com/actions/javascript-action/actions) for runs of this action! :rocket:
+Seethe[actionstab](https://github.com/actions/javascript-action/actions)forrunsofthisaction!:rocket:
 
-## Usage:
+##Usage:
 
-After testing you can [create a v1 tag](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md) to reference the stable and tested action
+Aftertestingyoucan[createav1tag](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)toreferencethestableandtestedaction
 
 ```yaml
-uses: actions/javascript-action@v1
+uses:actions/javascript-action@v1
 with:
-  milliseconds: 1000
+milliseconds:1000
 ```
