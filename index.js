@@ -51,7 +51,7 @@ async function run() {
     core.debug(`new body: ${request.body}`)
 
     const client = github.getOctokit(inputs.token);
-    const response = await client.pulls.update(request);
+    const response = await client.rest.pulls.update(request);
 
     core.info(`response: ${response.status}`);
     if (response.status !== 200) {
