@@ -19,7 +19,7 @@ async function run() {
     core.info(title);
     const matches = title.match(/(\w+-\d+)/)
     if (!(matches)) {
-      core.warning("Jira ticket not in PR title");
+      core.warning("Jira ticket not in PR ttitle");
       return;
     }
     const jiraTicketKey = matches[0];
