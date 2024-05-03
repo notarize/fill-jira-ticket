@@ -62,7 +62,7 @@ See the [versioning documentation](https://github.com/actions/toolkit/blob/maste
 You can now validate the action by referencing the releases/v1 branch
 
 ```yaml
-uses: notarize/fill-jira-ticket@v8
+uses: notarize/fill-jira-ticket@v9
 with:
   repo-token: ${{ secrets.github_token }}
 ```
@@ -74,7 +74,7 @@ See the [actions tab](https://github.com/actions/javascript-action/actions) for 
 After testing you can [create a tag](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md) to reference the stable and tested action
 
 ```yaml
-uses: notarize/fill-jira-ticket@v8
+uses: notarize/fill-jira-ticket@v9
 with:
   repo-token: ${{ secrets.github_token }}
 ```
