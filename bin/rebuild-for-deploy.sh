@@ -7,3 +7,4 @@ cd .. || exit 1
 rm -rf node_modules
 rm -f package-lock.json
 npm install -omit=dev
+npm dedup -omit=dev
